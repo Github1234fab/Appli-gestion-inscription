@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" id="entryDate" />
+  </body>
+  <script>
+    let d = "";
+    let entry = document.getElementById("entryDate");
+    entry.addEventListener("mouseleave", (event) => {
+      //recuperation valeur
+      d = event.target.value;
+      //attribution valeur récupérée newDate
+      let entryStudentDate = new Date(d);
+      console.log(entryStudentDate);
+
+      //date saisie dans l'input sous forme 2023-03-9 avec 77 jours (un trimestre, soit 11 cours)
+      let tempDate = new Date(entryStudentDate.getTime());
+      tempDate.setDate(tempDate.getDate() + 77);
+      console.log(tempDate);
+
+      let exitDate = tempDate.toDateString();
+      //nouvelle instance de Date, car modifiée par setDate et toDateString et permet d'avoir un code propre
+      let exitStudentDate = new Date(exitDate);
+      console.log(exitStudentDate);
+
+      //   //date saisie dans l'input sous forme 2023-03-9 avec 77 jours (un trimestre, soit 11 cours, soit 77 en plus)
+      //   let exitDatecalculation = entryStudentDate.setDate(entryStudentDate.getDate() + 77);
+      //   let exitDate = entryStudentDate.toDateString();
+      //   //nouvelle instance de Date, car modifiée par setDate et toDateString et permet d'avoir un code propre
+      //   let exitStudentDate = new Date(exitDate);
+      //   console.log(exitStudentDate);
+      // date des vacances de la toussaint
+      const ToussaintVacationEntry = new Date("2022-9-22");
+      const ToussaintVacationExit = new Date("2022-10-6");
+      // date des vacances de Noël
+      const NoelVacationEntry = new Date("2022-11-17");
+      const NoelVacationExit = new Date("2023-0-1");
+      // date des vacances d'Hiver
+      const HiverVacationEntry = new Date("2023-1-4");
+      const HiverVacationExit = new Date("2023-1-19");
+      // date des vacances de Printemps
+      const PrintempsVacationEntry = new Date("2023-4-8");
+      const PrintempsVacationExit = new Date("2023-4-23");
+      // condition pour savoir si la date de sortie prévue est soit dans une période de vacance,
+      //    soit après, ce qui signifie que l'élève doit bénéficier de 14 jours supplémentaires, soit deux semaines, soit deux cours en plus.
+      if (entryStudentDate < PrintempsVacationEntry && exitStudentDate > PrintempsVacationExit) {
+        let exitDateUpdateCalculation = exitStudentDate.setDate(exitStudentDate.getDate() + 14);
+        let exitDateUpdate = exitStudentDate.toDateString();
+        console.log(exitDateUpdate);
+      }
+    });
+  </script>
+</html>
